@@ -5,6 +5,10 @@ import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 import java.util.Scanner;
 
+import entitites.Contract;
+import entitites.Installment;
+import services.ContractService;
+
 public class Program {
 
 	public static void main(String[] args) {
@@ -21,6 +25,22 @@ public class Program {
 		System.out.print("Data (dd/MM/yyyy): ");
 		LocalDate date = LocalDate.parse(sc.next(), fmt);
 		double totalValue = sc.nextDouble();
+		
+		Contract obj = new Contract(number, date, totalValue);
+		
+		System.out.print("Entre com os numeros de parcela: ");
+		int n = sc.nextInt();
+		sc.nextLine();
+		
+		ContractService contractService = new ContractService(null);
+		
+		contractService.processContract(obj, n);
+		
+		System.out.println("Parcelas: ");
+		for (Installment installment : obj.getInstallments()) {
+			System.out.println(installment);
+		}
+		
 		
 		
 		sc.close();
