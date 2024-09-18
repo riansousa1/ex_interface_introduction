@@ -8,6 +8,7 @@ import java.util.Scanner;
 import entitites.Contract;
 import entitites.Installment;
 import services.ContractService;
+import services.PaypalService;
 
 public class Program {
 
@@ -24,6 +25,7 @@ public class Program {
 		sc.nextLine();
 		System.out.print("Data (dd/MM/yyyy): ");
 		LocalDate date = LocalDate.parse(sc.next(), fmt);
+		System.out.print("Valor do contrato: ");
 		double totalValue = sc.nextDouble();
 		
 		Contract obj = new Contract(number, date, totalValue);
@@ -32,7 +34,7 @@ public class Program {
 		int n = sc.nextInt();
 		sc.nextLine();
 		
-		ContractService contractService = new ContractService(null);
+		ContractService contractService = new ContractService(new PaypalService());
 		
 		contractService.processContract(obj, n);
 		
